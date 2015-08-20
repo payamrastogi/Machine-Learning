@@ -1,3 +1,3 @@
--Number of columns in the given matrix
+- Number of columns in the given matrix
 * columns (a)
 * size(a, 2)
