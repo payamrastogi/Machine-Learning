@@ -12,13 +12,13 @@
 - for loop
   * for i = 1:size(x,1)
 
-       <do something>
+       //do something
 
      end;
 
 - if condition
   * if(x(1,1)==5)
 
-        <do something>
+        //do something
 
     end;
