@@ -29,3 +29,4 @@
     end;
 
     more - https://www.gnu.org/software/octave/doc/interpreter/The-if-Statement.html
+         - https://en.wikibooks.org/wiki/Octave_Programming_Tutorial/Loops_and_conditions
