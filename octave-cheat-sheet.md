@@ -19,9 +19,13 @@
 
      end;
 
+     more - https://www.gnu.org/software/octave/doc/interpreter/The-for-Statement.html
+
 - if condition
   * if(x(1,1)==5)
 
         //do something
 
     end;
+
+    more - https://www.gnu.org/software/octave/doc/interpreter/The-if-Statement.html
