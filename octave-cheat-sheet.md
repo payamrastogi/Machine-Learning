@@ -5,3 +5,20 @@
 - Number of rows in the given matrix
   * rows(a)
   * size(a, 1)
+
+- Compute e^x for each element of x
+  * exp (x)
+
+- for loop
+  * for i = 1:size(x,1)
+
+       <do something>
+
+     end;
+
+- if condition
+  * if(x(1,1)==5)
+
+        <do something>
+
+    end;
