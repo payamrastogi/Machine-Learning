@@ -9,6 +9,9 @@
 - Compute e^x for each element of x
   * exp (x)
 
+- Comute log for each element of x
+  * log (x)
+
 - for loop
   * for i = 1:size(x,1)
 
