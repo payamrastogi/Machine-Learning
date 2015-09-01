@@ -30,14 +30,14 @@ X = [ones(m, 1) X];
 %       for each row.
 %
 
-disp(m); %5000
-disp(size(X)); %5000 401 - 5000 images, 20 by 20 grid of pixels is "unenrolled" into 400-dimensional vector
-disp(size(all_theta));%10 401
-disp(num_labels);%10
-disp(size(p));%5000 1
+%disp(m); %5000
+%disp(size(X)); %5000 401 - 5000 images, 20 by 20 grid of pixels is "unenrolled" into 400-dimensional vector
+%disp(size(all_theta));%10 401
+%disp(num_labels);%10
+%disp(size(p));%5000 1
 
 A = X * all_theta';
-disp(size(A));
+%disp(size(A));
 [num, index] = max(A, [], 2);
 p = index;
 
