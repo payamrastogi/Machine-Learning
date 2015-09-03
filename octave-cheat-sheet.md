@@ -30,3 +30,27 @@
 
     more - https://www.gnu.org/software/octave/doc/interpreter/The-if-Statement.html
          - https://en.wikibooks.org/wiki/Octave_Programming_Tutorial/Loops_and_conditions
+
+- Compute max row-wise and return index and number itself
+  * [num, index] = max(A, [], 2);
+
+  - Size of a column in a matrix
+  * size(A, 2);
+
+
+- Add a column before matrix
+  * b = [ones(3,1) b]
+
+>e.g
+
+    b = rand(3, 2)
+
+    0.366929   0.970706
+    0.071782   0.715650
+    0.777319   0.890047
+
+    b = [ones(3,1) b]
+
+    1.000000   0.366929   0.970706
+    1.000000   0.071782   0.715650  
+    1.000000   0.777319   0.890047
