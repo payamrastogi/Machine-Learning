@@ -62,27 +62,43 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-disp(size(Theta1));%25 401
-disp(size(Theta2));%10 26
-disp(m);%5000
-disp(num_labels);% 10
-disp(size(X));%5000 400
-disp(size(y));%5000 1
+%disp(size(Theta1));%25 401
+%disp(size(Theta2));%10 26
+%disp(m);%5000
+%disp(num_labels);% 10
+%disp(size(X));%5000 400
+%disp(size(y));%5000 1
 
 %Random Initialization
 %Theta1 = rand(10, 11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 %Theta2 = rand(1, 11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 
 X = [ones(m,1) X];
-disp(size(X));%5000 401
+%disp(size(X));%5000 401
 a1 = [ones(m,1) sigmoid(X * Theta1')]; % [5000 401][401 25] = [5000 25] biasing->[5000 26]
-disp(size(a1)); %5000 26
+%disp(a1);
+%disp(size(a1)); %5000 26
 H = sigmoid(a1 * Theta2'); %[5000 26][10 26] -> [5000 10]
-cost = -y'*log(H) - (1-y')*log(1-H);
+%disp(H);
+%y =
+%   1
+%   7
+%   9
+%   ...
+%   8
+yVector = repmat([1:num_labels], m, 1) == repmat(y, 1, num_labels);%element-wise comparison
+%yVector =
+%   [1 0 0 0 0 0 0 0 0 0]
+%   [0 0 0 0 0 0 1 0 0 0]
+%   [0 0 0 0 0 0 0 0 1 0]
+%   ...
+%   [0 0 0 0 0 0 0 1 0 0]
+%disp(size(repmat([1:num_labels], m, 1)));%5000 10
+%disp(size(repmat(y, 1, num_labels)));%5000 100
+%disp(size(yVector));%5000 10
+cost = -yVector.*log(H) - (1-yVector).*log(1-H);
 cost = sum(sum(cost));
-cost = 1/m * cost;
-
-
+J = 1/m * cost;
 
 
 
