@@ -73,8 +73,14 @@ disp(size(y));%5000 1
 %Theta1 = rand(10, 11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 %Theta2 = rand(1, 11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 
-
-
+X = [ones(m,1) X];
+disp(size(X));%5000 401
+a1 = [ones(m,1) sigmoid(X * Theta1')]; % [5000 401][401 25] = [5000 25] biasing->[5000 26]
+disp(size(a1)); %5000 26
+H = sigmoid(a1 * Theta2'); %[5000 26][10 26] -> [5000 10]
+cost = -y'*log(H) - (1-y')*log(1-H);
+cost = sum(sum(cost));
+cost = 1/m * cost;
 
 
 
