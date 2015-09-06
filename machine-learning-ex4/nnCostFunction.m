@@ -73,13 +73,13 @@ Theta2_grad = zeros(size(Theta2));
 %Theta1 = rand(10, 11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 %Theta2 = rand(1, 11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 
-X = [ones(m,1) X];
-%disp(size(X));%5000 401
-a1 = [ones(m,1) sigmoid(X * Theta1')]; % [5000 401][401 25] = [5000 25] biasing->[5000 26]
-%disp(a1);
-%disp(size(a1)); %5000 26
-H = sigmoid(a1 * Theta2'); %[5000 26][10 26] -> [5000 10]
-%disp(H);
+a1 = [ones(m,1) X];
+%disp(size(a1));%5000 401
+a2 = [ones(m,1) sigmoid(a1 * Theta1')]; % [5000 401][401 25] = [5000 25] biasing->[5000 26]
+%disp(a2);
+%disp(size(a2)); %5000 26
+a3 = sigmoid(a2 * Theta2'); %[5000 26][26 10] -> [5000 10]
+%disp(a3);
 %y =
 %   1
 %   7
@@ -96,19 +96,39 @@ yVector = repmat([1:num_labels], m, 1) == repmat(y, 1, num_labels);%element-wise
 %disp(size(repmat([1:num_labels], m, 1)));%5000 10
 %disp(size(repmat(y, 1, num_labels)));%5000 100
 %disp(size(yVector));%5000 10
-cost = -yVector.*log(H) - (1-yVector).*log(1-H);
+cost = -yVector.*log(a3) - (1-yVector).*log(1-a3);
 cost = sum(sum(cost));
 J = 1/m * cost;
 
+%regularization of cost function
+%removing bias term
+Theta1WithoutBias = Theta1(:, 2:end);
+Theta2WithoutBias = Theta2(:, 2:end);
+%disp(size(Theta3));%25 400
+%disp(size(Theta4));%10 25
+temp1 = sum(sum(Theta1WithoutBias.^2)) + sum(sum(Theta2WithoutBias.^2));
+reg = (lambda/(2*m))*temp1;
+J = J + reg;
 
+D1 = zeros(size(Theta1));
+D2 = zeros(size(Theta2));
 
+%a1(t,:)[401 1]
+for t=1:m
+    d3t = a3(t,:)' - yVector(t,:)'; % d3t[10 1]
+%   disp(size(d3t))%d3t[10 1]
+    z2t = [1, a1(t,:) * Theta1']; %[1 401][401 25] -> [1 25]
+%   disp(size(z2t));[1 26]
+    d2t = Theta2' * d3t .* sigmoidGradient(z2t'); %[26 10][10 1] ->[26 1].*[26 1] -> [26 1]
+%    disp(size(d2t));[26 1]
+    D1 = D1 + d2t(2:end) * a1(t, :); %[25 1][1 401]
+    D2 = D2 + d3t * a2(t,:); %[10 1][26 1]
+end;
 
-
-
-
-
-
-
+Theta1ZeroBias = [ zeros(size(Theta1, 1), 1) Theta1WithoutBias ];
+Theta2ZeroBias = [ zeros(size(Theta2, 1), 1) Theta2WithoutBias ];
+Theta1_grad = (1 / m) * D1 + (lambda / m) * Theta1ZeroBias;
+Theta2_grad = (1 / m) * D2 + (lambda / m) * Theta2ZeroBias;
 % -------------------------------------------------------------
 
 % =========================================================================
