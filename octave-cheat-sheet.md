@@ -69,9 +69,3 @@
     sum(a)
     ans =
     1.59273   0.67506   1.33410
-
-- To compare to strings
-  * strcmp(str, vocabList{i})
-
-- To calculate norm
-  * norm(x1-x2)^2
